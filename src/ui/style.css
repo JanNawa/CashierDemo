@@ -1,0 +1,44 @@
+.header {
+    -fx-text-fill: navy;
+    -fx-font-weight: bold;
+    -fx-font-size: 20pt;
+    -fx-alignment: center;
+    -fx-padding: 10 10 10 10;
+}
+#confirmButton {
+    -fx-background-color: navy;
+    -fx-text-fill: white;
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+    -fx-border-insets: 5;
+    -fx-padding: 5 10 5 10;
+    -fx-pref-width: Infinity;
+    -fx-alignment: center;
+}
+.labelHistory{
+    -fx-text-fill: navy;
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+    -fx-alignment: center;
+    -fx-padding: 10 10 10 10;
+}
+.labelPrice{
+    -fx-text-fill: navy;
+    -fx-font-weight: bold;
+    -fx-font-size: 10pt;
+    -fx-alignment: center;
+    -fx-padding: 5 5 5 5;
+}
+.deleteButton{
+    -fx-background-color: red;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+#dateButton{
+    -fx-background-color: navy;
+    -fx-text-fill: white;
+    -fx-font-size: 10pt;
+    -fx-font-weight: bold;
+    -fx-border-insets: 5;
+    -fx-padding: 5 10 5 10;
+}

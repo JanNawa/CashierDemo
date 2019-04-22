@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserController">
+    <stylesheets>
+        <URL value="@style.css"/>
+    </stylesheets>
+    <padding>
+        <Insets right="10" bottom="10" left="10"/>
+    </padding>
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="Go to History" onAction="#goToHistory"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Exit" onAction="#exitCashier"/>
+                    </items>
+                </Menu>
+            </MenuBar>
+            <Label styleClass="header">
+                User Orders
+            </Label>
+        </VBox>
+    </top>
+    <left>
+        <VBox spacing="5">
+            <Button fx:id="product1Button" onAction="#addProduct"></Button>
+            <Button fx:id="product2Button" onAction="#addProduct"></Button>
+            <Button fx:id="product3Button" onAction="#addProduct"></Button>
+            <Button fx:id="product4Button" onAction="#addProduct"></Button>
+            <Button fx:id="product5Button" onAction="#addProduct"></Button> 
+            <Button fx:id="deleteButton" onAction="#deleteProduct" styleClass="deleteButton">Delete Selected Item</Button>
+        </VBox>
+    </left>
+    <center>
+        <ListView fx:id="orderList">
+            
+        </ListView>
+    </center>
+    <bottom>
+        <VBox>
+            <Label fx:id="subtotal" styleClass="labelPrice"></Label>
+            <Label fx:id="tax" styleClass="labelPrice"></Label>
+            <Label fx:id="total" styleClass="labelPrice"></Label>
+            <Button fx:id="confirmButton" onAction="#confirmOrder">Confirm</Button>
+        </VBox>      
+    </bottom>  
+</BorderPane>

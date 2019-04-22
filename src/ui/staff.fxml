@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.StaffController">
+    <stylesheets>
+        <URL value="@style.css"/>
+    </stylesheets>
+    <padding>
+        <Insets right="10" bottom="10" left="10"/>
+    </padding>
+    <top>
+        <Label styleClass="header">
+            Order History
+        </Label>
+    </top>
+    <left>
+        <VBox spacing="5">
+            <Button fx:id="viewAllButton" onAction="#viewAllHistory" >View All History</Button>
+            <Label text="Filter Product" styleClass="labelHistory"/>
+            <Button fx:id="product1Button" onAction="#filterProduct"></Button>
+            <Button fx:id="product2Button" onAction="#filterProduct"></Button>
+            <Button fx:id="product3Button" onAction="#filterProduct"></Button>
+            <Button fx:id="product4Button" onAction="#filterProduct"></Button>
+            <Button fx:id="product5Button" onAction="#filterProduct"></Button> 
+            <Label text="History for specific date" styleClass="labelHistory"/>
+            <DatePicker fx:id="datePicker"/>
+            <Button fx:id="dateButton" onAction="#filterDateOrder" >go</Button>
+        </VBox>    
+    </left>
+    <center>
+        <ListView fx:id="historyList">
+            
+        </ListView>
+    </center>
+</BorderPane>

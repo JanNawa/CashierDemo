@@ -1,0 +1,78 @@
+
+orderId=1000
+dateTime=2019-03-27T19:31:07.720
+order=[id = 101	name = Milk	description = Low Fat 2.0 litres	price = 4.99]
+subtotal=4.99
+tax=0.6487
+total=5.6387
+==========
+orderId=1001
+dateTime=2019-03-27T19:31:12.025
+order=[id = 101	name = Milk	description = Low Fat 2.0 litres	price = 4.99, id = 102	name = Eggs	description = White Large 12 Eggs	price = 2.49, id = 103	name = Bread	description = 100% Whole Wheat Sliced Bread	price = 2.0, id = 104	name = Yogurt	description = Natural Yogurt 750 g	price = 2.89, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99]
+subtotal=24.36
+tax=3.1668
+total=27.526799999999998
+==========
+orderId=1002
+dateTime=2019-03-27T19:32:26.550
+order=[id = 103	name = Bread	description = 100% Whole Wheat Sliced Bread	price = 2.0]
+subtotal=2.0
+tax=0.26
+total=2.26
+==========
+orderId=1003
+dateTime=2019-03-29T11:38:30.465
+order=[id = 102	name = Eggs	description = White Large 12 Eggs	price = 2.49]
+subtotal=2.49
+tax=0.32370000000000004
+total=2.8137000000000003
+==========
+orderId=1004
+dateTime=2019-03-29T11:56:35.259
+order=[id = 101	name = Milk	description = Low Fat 2.0 litres	price = 4.99, id = 103	name = Bread	description = 100% Whole Wheat Sliced Bread	price = 2.0, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99]
+subtotal=18.98
+tax=2.4674
+total=21.447400000000002
+==========
+orderId=1005
+dateTime=2019-03-29T12:59:26.268
+order=[id = 101	name = Milk	description = Low Fat 2.0 litres	price = 4.99, id = 103	name = Bread	description = 100% Whole Wheat Sliced Bread	price = 2.0, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99]
+subtotal=66.94
+tax=8.7022
+total=75.6422
+==========
+orderId=1006
+dateTime=2019-03-29T13:49:01.459
+order=[id = 101	name = Milk	description = Low Fat 2.0 litres	price = 4.99]
+subtotal=4.99
+tax=0.6487
+total=5.6387
+==========
+orderId=1007
+dateTime=2019-03-29T14:02:30.120
+order=[id = 101	name = Milk	description = Low Fat 2.0 litres	price = 4.99, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99, id = 103	name = Bread	description = 100% Whole Wheat Sliced Bread	price = 2.0]
+subtotal=18.98
+tax=2.4674
+total=21.447400000000002
+==========
+orderId=1008
+dateTime=2019-03-29T14:09:16.947
+order=[id = 101	name = Milk	description = Low Fat 2.0 litres	price = 4.99, id = 102	name = Eggs	description = White Large 12 Eggs	price = 2.49, id = 103	name = Bread	description = 100% Whole Wheat Sliced Bread	price = 2.0, id = 104	name = Yogurt	description = Natural Yogurt 750 g	price = 2.89, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99, id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99]
+subtotal=36.35
+tax=4.7255
+total=41.075500000000005
+==========
+orderId=1009
+dateTime=2019-04-03T09:28:10.407
+order=[id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99, id = 101	name = Milk	description = Low Fat 2.0 litres	price = 4.99, id = 103	name = Bread	description = 100% Whole Wheat Sliced Bread	price = 2.0]
+subtotal=18.98
+tax=2.4674
+total=21.447400000000002
+==========
+orderId=1010
+dateTime=2019-04-03T09:33:33.546
+order=[id = 105	name = Salmon	description = Atlantic Salmon Portion 300 g	price = 11.99, id = 103	name = Bread	description = 100% Whole Wheat Sliced Bread	price = 2.0, id = 101	name = Milk	description = Low Fat 2.0 litres	price = 4.99]
+subtotal=18.98
+tax=2.4674
+total=21.447400000000002
+==========
