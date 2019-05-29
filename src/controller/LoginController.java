@@ -14,8 +14,6 @@ import javafx.scene.layout.BorderPane;
  * @author Jan
  */
 public class LoginController implements Initializable {
-    @FXML
-    private BorderPane userBorderPane;
     
     @FXML
     private TextField username;
