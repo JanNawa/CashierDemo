@@ -8,7 +8,7 @@
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
 
-<DialogPane id="signupDialogPane" prefHeight="150.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignupController">
+<DialogPane id="signupDialogPane" prefHeight="150.0" prefWidth="450.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SignupController">
     <stylesheets>
         <URL value="@style.css"/>
     </stylesheets>
