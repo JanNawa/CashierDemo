@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
 
-<BorderPane fx:id="borderPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserController">
+<BorderPane fx:id="userBorderPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.UserController">
     <stylesheets>
         <URL value="@style.css"/>
     </stylesheets>
