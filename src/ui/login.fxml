@@ -28,6 +28,9 @@
                 Password
             </Label>
             <PasswordField fx:id="password" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+            <Label GridPane.rowIndex="3" GridPane.columnIndex="0">
+                Forget Password?
+            </Label>
         </GridPane>
     </content>
 </DialogPane>
