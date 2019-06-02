@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 
 /**
  * FXML Controller class
@@ -30,8 +29,8 @@ public class LoginController implements Initializable {
     }
     
     public boolean authenticateAccount(){
-        String userInput = username.getText();
-        String passwordInput = password.getText();
+        String userInput = username.getText().trim();
+        String passwordInput = password.getText().trim();
         return authenticateUser(userInput) && authenticatePassword(passwordInput);
     }
     
