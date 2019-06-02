@@ -145,8 +145,8 @@ public class UserController implements Initializable {
     @FXML
     public void deleteProduct(ActionEvent event) {
         if (orderList.getSelectionModel().getSelectedItem() == null) {
-            showAlertBox(AlertType.ERROR, 
-                    AlertMessages.ORDER_STATUS_TITLE.getMessage() , 
+            showAlertBox(AlertType.ERROR,
+                    AlertMessages.ORDER_STATUS_TITLE.getMessage(),
                     AlertMessages.ORDER_STATUS_NO_SELECTION_DESC.getMessage());
         } else {
             Product item = (Product) orderList.getSelectionModel().getSelectedItem();
@@ -155,28 +155,35 @@ public class UserController implements Initializable {
             updatePrice();
         }
     }
-    
+
     @FXML
-    public void signup(){
+    public void signup() {
         Object[] signupElements = initDialog("Sign Up", "/ui/signup.fxml");
         Dialog<ButtonType> signupDialog = (Dialog<ButtonType>) signupElements[0];
         FXMLLoader fxmlLoader = (FXMLLoader) signupElements[1];
 
         //wait for user to press button
         Optional<ButtonType> result = signupDialog.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
+        if (result.isPresent() && result.get() == ButtonType.OK) {
             SignupController controller = fxmlLoader.getController();
-            if(!controller.isValidUsername() && controller.isSamePassword()){
+            if (controller.isUsernameNullOrEmpty()
+                    || controller.isPasswordNullOrEmpty()
+                    || controller.isPasswordConfirmNullOrEmpty()) {
+                showAlertBox(AlertType.ERROR,
+                        AlertMessages.SIGNUP_EMPTY_FIELD_TITLE.getMessage(),
+                        AlertMessages.SIGNUP_EMPTY_FIELD_DESC.getMessage());
+
+            } else if (!controller.isValidUsername() && controller.isSamePassword()) {
                 goToHistory();
             } else {
-                if(controller.isValidUsername()){
-                    showAlertBox(AlertType.ERROR, 
-                        AlertMessages.SIGNUP_INVALID_USERNAME_TITLE.getMessage(), 
-                        AlertMessages.SIGNUP_INVALID_USERNAME_DESC.getMessage());
-                } else {
+                if (controller.isValidUsername()) {
                     showAlertBox(AlertType.ERROR,
-                        AlertMessages.SIGNUP_DIFFERENT_PASSWORD_TITLE.getMessage(),
-                        AlertMessages.SIGNUP_DIFFERENT_PASSWORD_DESC.getMessage());
+                            AlertMessages.SIGNUP_INVALID_USERNAME_TITLE.getMessage(),
+                            AlertMessages.SIGNUP_INVALID_USERNAME_DESC.getMessage());
+                } else if (!controller.isSamePassword()) {
+                    showAlertBox(AlertType.ERROR,
+                            AlertMessages.SIGNUP_DIFFERENT_PASSWORD_TITLE.getMessage(),
+                            AlertMessages.SIGNUP_DIFFERENT_PASSWORD_DESC.getMessage());
                 }
             }
         }
@@ -190,19 +197,19 @@ public class UserController implements Initializable {
 
         //wait for user to press button
         Optional<ButtonType> result = loginDialog.showAndWait();
-        if(result.isPresent() && result.get() == ButtonType.OK) {
+        if (result.isPresent() && result.get() == ButtonType.OK) {
             LoginController controller = fxmlLoader.getController();
             if (controller.authenticateAccount()) {
                 goToHistory();
             } else {
-                showAlertBox(AlertType.ERROR, 
-                        AlertMessages.LOGIN_INVALID_TITLE.getMessage(), 
+                showAlertBox(AlertType.ERROR,
+                        AlertMessages.LOGIN_INVALID_TITLE.getMessage(),
                         AlertMessages.LOGIN_INVALID_DESC.getMessage());
             }
         }
     }
-    
-    private Object[] initDialog(String title, String resource){
+
+    private Object[] initDialog(String title, String resource) {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(userBorderPane.getScene().getWindow());
         dialog.setTitle(title);
@@ -216,7 +223,7 @@ public class UserController implements Initializable {
 
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-        
+
         return new Object[]{dialog, fxmlLoader};
     }
 
@@ -241,13 +248,13 @@ public class UserController implements Initializable {
             int newId = orderHis.retrieveOrderId() + 1;
             cashier.setOrderId(newId);
             orderHis.writeOrderHistory(cashier);
-            showAlertBox(AlertType.CONFIRMATION, 
-                    AlertMessages.ORDER_STATUS_TITLE.getMessage() , 
+            showAlertBox(AlertType.CONFIRMATION,
+                    AlertMessages.ORDER_STATUS_TITLE.getMessage(),
                     AlertMessages.ORDER_STATUS_SUCCESS_DESC.getMessage());
             reset();
         } else {
-            showAlertBox(AlertType.ERROR, 
-                    AlertMessages.ORDER_STATUS_TITLE.getMessage() , 
+            showAlertBox(AlertType.ERROR,
+                    AlertMessages.ORDER_STATUS_TITLE.getMessage(),
                     AlertMessages.ORDER_STATUS_EMPTY_DESC.getMessage());
         }
     }
