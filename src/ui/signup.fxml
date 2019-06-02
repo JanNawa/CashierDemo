@@ -34,22 +34,22 @@
                 Confirm Password
             </Label>
             <PasswordField fx:id="passwordConfirm" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
-<!--Check password - 8 characters-->
-            <ImageView GridPane.rowIndex="4" GridPane.columnIndex="0" fitWidth="30" fitHeight="35">               
-                <Image url="/images/correct.png"/>
+            <!--Check password - 8 characters-->
+            <ImageView fx:id="lengthIcon" GridPane.rowIndex="4" GridPane.columnIndex="0" fitWidth="25" fitHeight="25">               
+                <Image url="/images/wrong.png"/>
             </ImageView>
             <Label GridPane.rowIndex="4" GridPane.columnIndex="1">
                 Should have at least 8 characters
             </Label>
-<!--Check password - special character-->           
-            <ImageView GridPane.rowIndex="5" GridPane.columnIndex="0" fitWidth="25" fitHeight="25" >
+            <!--Check password - special character-->           
+            <ImageView fx:id="specialCharIcon" GridPane.rowIndex="5" GridPane.columnIndex="0" fitWidth="25" fitHeight="25" >
                 <Image url="/images/wrong.png"/>
             </ImageView>           
             <Label GridPane.rowIndex="5" GridPane.columnIndex="1">
                 Should have at least 1 special character (e.g. @, %, +, /,...)
             </Label>
-<!--Check password - UPPERCASE & lowercase-->            
-            <ImageView GridPane.rowIndex="6" GridPane.columnIndex="0" fitWidth="25" fitHeight="25">
+            <!--Check password - UPPERCASE & lowercase-->            
+            <ImageView fx:id="upperLowercaseIcon" GridPane.rowIndex="6" GridPane.columnIndex="0" fitWidth="25" fitHeight="25">
                 <Image url="/images/wrong.png"/>
             </ImageView>       
             <Label GridPane.rowIndex="6" GridPane.columnIndex="1">
