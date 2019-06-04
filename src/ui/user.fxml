@@ -20,6 +20,7 @@
             <MenuBar>
                 <Menu text="File">
                     <items>
+                        <MenuItem text="Product List" onAction="#goToProductList"/>
                         <MenuItem text="Sign Up" onAction="#signup"/>
                         <MenuItem text="Login" onAction="#login"/>
                         <MenuItem text="Go to History" onAction="#goToHistory"/>
@@ -44,9 +45,7 @@
         </VBox>
     </left>
     <center>
-        <ListView fx:id="orderList">
-            
-        </ListView>
+        <ListView fx:id="orderList"/>
     </center>
     <bottom>
         <VBox>
