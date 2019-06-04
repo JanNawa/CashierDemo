@@ -104,31 +104,27 @@ public class UserController implements Initializable {
 
         switch (name) {
             case "Milk":
-                cashier.addProduct(product1);
-                listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
-                updatePrice();
+                updateListAndUpdateUI(product1);
                 break;
             case "Eggs":
-                cashier.addProduct(product2);
-                listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
-                updatePrice();
+                updateListAndUpdateUI(product2);
                 break;
             case "Bread":
-                cashier.addProduct(product3);
-                listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
-                updatePrice();
+                updateListAndUpdateUI(product3);
                 break;
             case "Yogurt":
-                cashier.addProduct(product4);
-                listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
-                updatePrice();
+                updateListAndUpdateUI(product4);
                 break;
             case "Salmon":
-                cashier.addProduct(product5);
-                listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
-                updatePrice();
+                updateListAndUpdateUI(product5);
                 break;
         }
+    }
+
+    private void updateListAndUpdateUI(Product product) {
+        cashier.addProduct(product);
+        listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+        updatePrice();
     }
 
     private void updatePrice() {
@@ -153,6 +149,21 @@ public class UserController implements Initializable {
             cashier.deleteProduct(item);
             listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
             updatePrice();
+        }
+    }
+
+    @FXML
+    public void goToProductList() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/ProductList.fxml"));
+            Parent root = (Parent) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.setTitle("Product List");
+            stage.setScene(new Scene(root, 750, 500));
+            stage.show();
+        } catch (IOException e) {
+            System.out.println("couldn't load product list page");
+            e.printStackTrace();
         }
     }
 
