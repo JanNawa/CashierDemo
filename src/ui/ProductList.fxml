@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import java.net.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane id="productListBorderPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ProductListController">
+    <stylesheets>
+        <URL value="@style.css"/>
+    </stylesheets>
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <top>
+        <HBox>
+            <Label styleClass="header">Product List</Label>
+            <ToolBar fx:id="barSearch">
+                <items>
+                    <TextField fx:id="searchField"/>
+                    <Button fx:id="searchButton">Search</Button>
+                    <Label fx:id="matchLabel"/>
+                </items>
+            </ToolBar>
+        </HBox>
+    </top>
+    <left>
+        <VBox>
+            <Label styleClass="subHeader">Grocery Category</Label>
+            <Label>Bakery</Label>
+            <Label>Dairy &amp; Eggs</Label>
+            <Label>Pasta &amp; Rice</Label>
+            <Label>Chips &amp; Snacks</Label>
+            <Label>Frozen Food</Label>
+            <Label>Cereal &amp; Breakfast</Label>
+            <Label>Drinks</Label>
+            <Label>Fruits &amp; Vegetables</Label>
+            <Label>Meat &amp; Seafood</Label>
+        </VBox>
+    </left>
+    <right>
+        <VBox>
+            <Label styleClass="subHeader">Promotion</Label>
+        </VBox>
+    </right>
+    <center>
+        <Label>Product List</Label>
+        <VBox spacing="5">
+            <Button fx:id="product1Button" onAction="#addProduct"></Button>
+            <Button fx:id="product2Button" onAction="#addProduct"></Button>
+            <Button fx:id="product3Button" onAction="#addProduct"></Button>
+            <Button fx:id="product4Button" onAction="#addProduct"></Button>
+            <Button fx:id="product5Button" onAction="#addProduct"></Button> 
+        </VBox>
+    </center>
+    <bottom>
+        <Label>Footer</Label>
+    </bottom>
+</BorderPane>
