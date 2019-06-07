@@ -21,7 +21,7 @@
             <ToolBar fx:id="barSearch">
                 <items>
                     <TextField fx:id="searchField"/>
-                    <Button fx:id="searchButton">Search</Button>
+                    <Button fx:id="searchButton" onAction="#searchKeyword">Search</Button>
                     <Label fx:id="matchLabel"/>
                 </items>
             </ToolBar>
@@ -47,13 +47,16 @@
         </VBox>
     </right>
     <center>
-        <Label>Product List</Label>
+        
         <VBox spacing="5">
+            <Label>Product List</Label>
             <Button fx:id="product1Button" onAction="#addProduct"></Button>
             <Button fx:id="product2Button" onAction="#addProduct"></Button>
             <Button fx:id="product3Button" onAction="#addProduct"></Button>
             <Button fx:id="product4Button" onAction="#addProduct"></Button>
             <Button fx:id="product5Button" onAction="#addProduct"></Button> 
+            <Label>Search Result</Label>
+            <ListView fx:id="searchListView"/>
         </VBox>
     </center>
     <bottom>
