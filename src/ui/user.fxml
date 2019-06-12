@@ -52,7 +52,7 @@
             <Label fx:id="subtotal" styleClass="labelPrice"></Label>
             <Label fx:id="tax" styleClass="labelPrice"></Label>
             <Label fx:id="total" styleClass="labelPrice"></Label>
-            <Button fx:id="confirmButton" onAction="#confirmOrder">Confirm</Button>
+            <Button fx:id="confirmButton" onAction="#confirmOrder" styleClass="accentButton">Confirm</Button>
         </VBox>      
     </bottom>  
 </BorderPane>
