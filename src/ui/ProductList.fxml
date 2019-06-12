@@ -54,7 +54,8 @@
             <Button fx:id="product2Button" onAction="#addProduct"></Button>
             <Button fx:id="product3Button" onAction="#addProduct"></Button>
             <Button fx:id="product4Button" onAction="#addProduct"></Button>
-            <Button fx:id="product5Button" onAction="#addProduct"></Button> 
+            <Button fx:id="product5Button" onAction="#addProduct"></Button>
+            <Button fx:id="goToCartButton" onAction="#goToCart" styleClass="accentButton" >See Cart</Button>  
             <Label>Search Result</Label>
             <ListView fx:id="searchListView"/>
         </VBox>
