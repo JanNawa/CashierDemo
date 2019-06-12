@@ -12,7 +12,7 @@
     -fx-alignment: center;
     -fx-padding: 10 10 10 10;
 }
-#confirmButton {
+.accentButton {
     -fx-background-color: navy;
     -fx-text-fill: white;
     -fx-font-size: 12pt;
