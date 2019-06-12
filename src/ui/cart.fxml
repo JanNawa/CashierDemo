@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane fx:id="cartBorderPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.CartController">
+    <stylesheets>
+        <URL value="@style.css"/>
+    </stylesheets>
+    <padding>
+        <Insets right="10" bottom="10" left="10"/>
+    </padding>
+    <top>
+        <VBox>
+            <MenuBar>
+                <Menu text="File">
+                    <items>
+                        <MenuItem text="Product List" onAction="#goToProductList"/>
+                        <MenuItem text="Sign Up" onAction="#signup"/>
+                        <MenuItem text="Login" onAction="#login"/>
+                        <MenuItem text="Go to History" onAction="#goToHistory"/>
+                        <SeparatorMenuItem/>
+                        <MenuItem text="Exit" onAction="#exitCashier"/>
+                    </items>
+                </Menu>
+            </MenuBar>
+            <Label styleClass="header">
+                Your Cart
+            </Label>
+        </VBox>
+    </top>
+    <left>
+        <VBox spacing="5">
+            <Button fx:id="deleteButton" onAction="#deleteProduct" styleClass="deleteButton">Delete Selected Item</Button>
+            <Button fx:id="resetButton" onAction="#resetCart" styleClass="deleteButton">Clear Cart</Button>
+        </VBox>
+    </left>
+    <center>
+        <ListView fx:id="orderList"/>
+    </center>
+    <bottom>
+        <VBox>
+            <Label fx:id="subtotal" styleClass="labelPrice"></Label>
+            <Label fx:id="tax" styleClass="labelPrice"></Label>
+            <Label fx:id="total" styleClass="labelPrice"></Label>
+            <Button fx:id="confirmButton" onAction="#confirmOrder" styleClass="accentButton">Confirm</Button>
+        </VBox>      
+    </bottom>  
+</BorderPane>
