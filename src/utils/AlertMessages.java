@@ -10,6 +10,9 @@ public enum AlertMessages {
     ORDER_STATUS_NO_SELECTION_DESC("Please select product to delete product."),
     ORDER_STATUS_EMPTY_DESC("Your order is successfully confirmed!"),
     
+    CART_EMPTY_TITLE("Empty the Cart"),
+    CART_EMPTY_DESC("Are you sure to empty the cart?"),
+    
     SIGNUP_EMPTY_FIELD_TITLE("Sign Up Error"),
     SIGNUP_EMPTY_FIELD_DESC("All fields are required."),
     
