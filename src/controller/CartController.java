@@ -15,6 +15,7 @@ import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleListProperty;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -26,8 +27,8 @@ import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javax.swing.JOptionPane;
 import utils.AlertBox;
 import utils.AlertMessages;
 
@@ -72,10 +73,13 @@ public class CartController implements Initializable {
         product4 = new Product(104, "Yogurt", "Natural Yogurt 750 g", 2.89);
         product5 = new Product(105, "Salmon", "Atlantic Salmon Portion 300 g", 11.99);
 
+        //testing only
+        orderList.getItems().add(new AdjustQuantity(1));
+        
         listProperty = new SimpleListProperty<>();
         listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
         orderList.itemsProperty().bind(listProperty);
-
+        
         updatePrice();
     }
     
@@ -102,6 +106,33 @@ public class CartController implements Initializable {
             case "Salmon":
                 updateListAndUpdateUI(product5);
                 break;
+        }
+    }
+    
+    // TODO-add in list view on eacj product list
+    class AdjustQuantity extends HBox {
+        Button minusButton = new Button("-");
+        Label quantityLabel = new Label();
+        Button addButton = new Button("+");
+        
+        AdjustQuantity(int quantity){
+            quantityLabel.setText(Integer.toString(quantity));
+            minusButton.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    if(Integer.parseInt(quantityLabel.toString()) <= 1){
+                        minusButton.isDisable();
+                    } else {
+                        quantityLabel.setText(Integer.toString(quantity-1));
+                    }
+                }
+            });
+            addButton.setOnAction(new EventHandler<ActionEvent>(){
+                @Override
+                public void handle(ActionEvent event) {
+                    quantityLabel.setText(Integer.toString(quantity+1));                  
+                }
+            });
         }
     }
 
