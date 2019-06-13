@@ -81,26 +81,14 @@ public class ProductListController implements Initializable {
         Button btn = (Button) event.getSource();
         String name = btn.getText();
         
-        switch (name) {
-            case "Milk":
-                selectedProducts.add(products[0]);
-                break;
-            case "Eggs":
-                selectedProducts.add(products[1]);
-                break;
-            case "Bread":
-                selectedProducts.add(products[2]);
-                break;
-            case "Yogurt":
-                selectedProducts.add(products[3]);
-                break;
-            case "Salmon":
-                selectedProducts.add(products[4]);
-                break;
-        }
+        addMatchProduct(name);
     }
     
     public void addProduct(String name) {
+        addMatchProduct(name);
+    }
+    
+    private void addMatchProduct(String name){
         switch (name) {
             case "Milk":
                 selectedProducts.add(products[0]);
