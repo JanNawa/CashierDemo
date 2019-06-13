@@ -2,18 +2,20 @@ package datamodel;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
+import utils.TaxRate;
 
 /**
  * This class models the basic attributes for Cashier.
  * 
- * @author Nawaphan Chayopathum(Jan)
+ * @author Jan, 2019
  */
 public class Cashier{
-    public static double taxRate = 0.13;
 
     private int orderId;
     private LocalDateTime dateTime;
     private ArrayList<Product> order;
+    private ArrayList<Integer> quantity;
     private double subtotal;
     private double tax;
     private double total;    
@@ -31,7 +33,8 @@ public class Cashier{
     public Cashier(){
         this.orderId = 1000;
         this.dateTime = LocalDateTime.now();
-        this.order  = new ArrayList();
+        this.order  = new ArrayList<>();
+        this.quantity = new ArrayList<>();
         this.subtotal = 0.0;
         this.tax = 0.0;
         this.total = 0.0;
@@ -42,8 +45,27 @@ public class Cashier{
      * 
      * @param product the selected product from user
      */
-    public void addProduct(Product product){
+    public void addProduct(Product product) {
+        // empty cart
+        if (order.isEmpty()) {
+            addNewProduct(product);
+            return;
+        }
+        // add quantity to existing product
+        for (int i = 0; i<order.size(); i++){
+            if(order.get(i) == product){
+                quantity.set(i, quantity.get(i)+1);
+                calcTotal();
+                return;
+            }
+        }
+        // add new product to non-empty cart
+        addNewProduct(product);
+    }
+    
+    private void addNewProduct(Product product){
         order.add(product);
+        quantity.add(1);
         calcTotal();
     }
     
@@ -53,6 +75,11 @@ public class Cashier{
      * @param product the selected product from user
      */
     public void deleteProduct(Product product){
+        for(int i=0; i<order.size(); i++){
+            if(order.get(i) == product){
+                quantity.remove(i);
+            }
+        }
         order.remove(product);
         calcTotal();
     }
@@ -69,7 +96,7 @@ public class Cashier{
         } else {
             subtotal = 0;
             for(int i = 0; i < size; i++){
-                subtotal += (order.get(i)).getPrice();
+                subtotal += ((order.get(i)).getPrice() * quantity.get(i));
             }
             return subtotal;
         }
@@ -80,7 +107,7 @@ public class Cashier{
      */
     public void calcTotal() {
         subtotal = calcSubtotal();
-        tax = subtotal * taxRate;    
+        tax = subtotal * TaxRate.TAX_RATE_ONTARIO;    
         total = subtotal + tax;
     }
 
@@ -109,6 +136,11 @@ public class Cashier{
     public ArrayList<Product> getOrder() {
         ArrayList<Product> copyOrder = new ArrayList<>(order);
         return copyOrder;
+    }
+    
+    public List<Integer> getQuantity() {
+        List<Integer> copyQuantity = new ArrayList<>(quantity);
+        return copyQuantity;
     }
     
     /**
@@ -148,6 +180,7 @@ public class Cashier{
         return "\norderId=" + orderId
                 + "\ndateTime=" + dateTime
                 + "\norder=" + order
+                + "\nquantity=" + quantity
                 + "\nsubtotal=" + subtotal
                 + "\ntax=" + tax
                 + "\ntotal=" + total;
