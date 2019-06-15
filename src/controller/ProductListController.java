@@ -72,10 +72,14 @@ public class ProductListController implements Initializable {
         product3Button.setText(products[2].getName());
         product4Button.setText(products[3].getName());
         product5Button.setText(products[4].getName());
-        
+
         selectedProducts = new ArrayList<>();
+
+        searchField.textProperty().addListener((observable, oldValue, newValue) -> {
+            searchKeyword();
+        });
     }
-    
+
     @FXML
     public void addProduct(ActionEvent event) {
         Button btn = (Button) event.getSource();
@@ -150,7 +154,7 @@ public class ProductListController implements Initializable {
     }
     
     @FXML
-    public void searchKeyword(ActionEvent event){
+    public void searchKeyword(){
         String searchFieldStr = searchField.getText().trim();
         searchListView.getItems().clear();
         for(Product product : products){
