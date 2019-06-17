@@ -39,6 +39,7 @@ public class UserController implements Initializable {
     Cashier cashier = new Cashier();
     OrderHistory orderHis = new OrderHistory();
     ListProperty<Product> listProperty;
+    ListProperty<Integer> quantityListProperty;
 
     @FXML
     private BorderPane userBorderPane;
@@ -60,6 +61,9 @@ public class UserController implements Initializable {
 
     @FXML
     private ListView orderList;
+    
+    @FXML
+    private ListView quantityList;
 
     @FXML
     private Label subtotal;
@@ -93,6 +97,10 @@ public class UserController implements Initializable {
         listProperty = new SimpleListProperty<>();
         listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
         orderList.itemsProperty().bind(listProperty);
+        
+        quantityListProperty = new SimpleListProperty<>();
+        quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
+        quantityList.itemsProperty().bind(quantityListProperty);
 
         updatePrice();
     }
@@ -124,6 +132,7 @@ public class UserController implements Initializable {
     private void updateListAndUpdateUI(Product product) {
         cashier.addProduct(product);
         listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+        quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
         updatePrice();
     }
 
