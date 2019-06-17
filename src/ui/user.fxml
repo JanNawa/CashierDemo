@@ -47,6 +47,9 @@
     <center>
         <ListView fx:id="orderList"/>
     </center>
+    <right>
+        <ListView fx:id="quantityList"/>
+    </right>
     <bottom>
         <VBox>
             <Label fx:id="subtotal" styleClass="labelPrice"></Label>
