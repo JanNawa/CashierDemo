@@ -15,7 +15,7 @@ public class Cashier{
     private int orderId;
     private LocalDateTime dateTime;
     private ArrayList<Product> order;
-    private ArrayList<Integer> quantity;
+    private List<Integer> quantity;
     private double subtotal;
     private double tax;
     private double total;    
