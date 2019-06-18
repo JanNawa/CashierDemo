@@ -38,7 +38,7 @@ public class UserController implements Initializable {
     Product product1, product2, product3, product4, product5;
     Cashier cashier = new Cashier();
     OrderHistory orderHis = new OrderHistory();
-    ListProperty<Product> listProperty;
+    ListProperty<Product> productListProperty;
     ListProperty<Integer> quantityListProperty;
 
     @FXML
@@ -82,11 +82,11 @@ public class UserController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        product1 = new Product(101, "Milk", "Low Fat 2.0 litres", 4.99);
-        product2 = new Product(102, "Eggs", "White Large 12 Eggs", 2.49);
-        product3 = new Product(103, "Bread", "100% Whole Wheat Sliced Bread", 2.00);
-        product4 = new Product(104, "Yogurt", "Natural Yogurt 750 g", 2.89);
-        product5 = new Product(105, "Salmon", "Atlantic Salmon Portion 300 g", 11.99);
+        product1 = new Product(101, 111, "Milk", "Low Fat 2.0 litres", 4.99);
+        product2 = new Product(102, 111, "Eggs", "White Large 12 Eggs", 2.49);
+        product3 = new Product(103, 111, "Bread", "100% Whole Wheat Sliced Bread", 2.00);
+        product4 = new Product(104, 111, "Yogurt", "Natural Yogurt 750 g", 2.89);
+        product5 = new Product(105, 111, "Salmon", "Atlantic Salmon Portion 300 g", 11.99);
 
         product1Button.setText(product1.getName());
         product2Button.setText(product2.getName());
@@ -94,13 +94,14 @@ public class UserController implements Initializable {
         product4Button.setText(product4.getName());
         product5Button.setText(product5.getName());
 
-        listProperty = new SimpleListProperty<>();
-        listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
-        orderList.itemsProperty().bind(listProperty);
+        productListProperty = new SimpleListProperty<>();
+        productListProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+        orderList.itemsProperty().bind(productListProperty);
         
         quantityListProperty = new SimpleListProperty<>();
         quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
         quantityList.itemsProperty().bind(quantityListProperty);
+        quantityList.setPrefWidth(75);
 
         updatePrice();
     }
@@ -131,7 +132,7 @@ public class UserController implements Initializable {
 
     private void updateListAndUpdateUI(Product product) {
         cashier.addProduct(product);
-        listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+        productListProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
         quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
         updatePrice();
     }
@@ -156,7 +157,8 @@ public class UserController implements Initializable {
         } else {
             Product item = (Product) orderList.getSelectionModel().getSelectedItem();
             cashier.deleteProduct(item);
-            listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+            productListProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+            quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
             updatePrice();
         }
     }
