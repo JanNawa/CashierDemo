@@ -17,6 +17,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -25,10 +26,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import utils.AlertBox;
 import utils.AlertMessages;
 
@@ -42,13 +45,17 @@ public class CartController implements Initializable {
     Product product1, product2, product3, product4, product5;
     Cashier cashier = new Cashier();
     OrderHistory orderHis = new OrderHistory();
-    ListProperty<Product> listProperty;
+    ListProperty<Product> productListProperty;
+    ListProperty<Integer> quantityListProperty;
 
     @FXML
     private BorderPane cartBorderPane;
 
     @FXML
     private ListView orderList;
+
+    @FXML
+    private ListView quantityList;
 
     @FXML
     private Label subtotal;
@@ -67,29 +74,83 @@ public class CartController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        product1 = new Product(101, "Milk", "Low Fat 2.0 litres", 4.99);
-        product2 = new Product(102, "Eggs", "White Large 12 Eggs", 2.49);
-        product3 = new Product(103, "Bread", "100% Whole Wheat Sliced Bread", 2.00);
-        product4 = new Product(104, "Yogurt", "Natural Yogurt 750 g", 2.89);
-        product5 = new Product(105, "Salmon", "Atlantic Salmon Portion 300 g", 11.99);
+        product1 = new Product(101, 111, "Milk", "Low Fat 2.0 litres", 4.99);
+        product2 = new Product(102, 111, "Eggs", "White Large 12 Eggs", 2.49);
+        product3 = new Product(103, 111, "Bread", "100% Whole Wheat Sliced Bread", 2.00);
+        product4 = new Product(104, 111,"Yogurt", "Natural Yogurt 750 g", 2.89);
+        product5 = new Product(105, 111,"Salmon", "Atlantic Salmon Portion 300 g", 11.99);
 
-        //testing only
-        orderList.getItems().add(new AdjustQuantity(1));
-        
-        listProperty = new SimpleListProperty<>();
-        listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
-        orderList.itemsProperty().bind(listProperty);
-        
+        productListProperty = new SimpleListProperty<>();
+        productListProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+        orderList.itemsProperty().bind(productListProperty);
+
+        quantityListProperty = new SimpleListProperty<>();
+        quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
+        quantityList.itemsProperty().bind(quantityListProperty);
+        quantityList.setPrefWidth(100);
+        quantityList.setCellFactory(new Callback<ListView<Integer>, ListCell<Integer>>() {
+            @Override
+            public ListCell<Integer> call(ListView<Integer> param) {
+                return new AdjustQuantity();
+            }
+        });
+
         updatePrice();
     }
-    
-    public void getSelectedProducts(List<Product> selectedProducts){
-        for(Product product : selectedProducts){
+
+    // TODO-add in list view on each product list
+    class AdjustQuantity extends ListCell<Integer> {
+
+        HBox hbox = new HBox();
+        Button minusButton = new Button("-");
+        Label quantityLabel = new Label("");
+        Button addButton = new Button("+");
+
+        private AdjustQuantity() {
+            quantityLabel.setPadding(new Insets(1));
+
+            hbox.getChildren().addAll(minusButton, quantityLabel, addButton);
+        }
+
+        @Override
+        protected void updateItem(Integer item, boolean empty) {
+            super.updateItem(item, empty);
+            if (item != null) {
+                quantityLabel.setText("" + item);
+                minusButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        if (item <= 1) {
+                            minusButton.isDisable();
+                        } else {
+                            int newQuantity = item - 1;
+                            quantityLabel.setText("" + newQuantity);
+                        }
+                    }
+                });
+
+                addButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        int newQuantity = item + 1;
+                        quantityLabel.setText("" + newQuantity);
+                    }
+                });
+                
+                setGraphic(hbox);
+            } else {
+                setGraphic(null);
+            }
+        }
+    }
+
+    public void getSelectedProducts(List<Product> selectedProducts) {
+        for (Product product : selectedProducts) {
             addProduct(product.getName());
         }
     }
 
-    public void addProduct(String name) {
+    private void addProduct(String name) {
         switch (name) {
             case "Milk":
                 updateListAndUpdateUI(product1);
@@ -108,37 +169,11 @@ public class CartController implements Initializable {
                 break;
         }
     }
-    
-    // TODO-add in list view on eacj product list
-    class AdjustQuantity extends HBox {
-        Button minusButton = new Button("-");
-        Label quantityLabel = new Label();
-        Button addButton = new Button("+");
-        
-        AdjustQuantity(int quantity){
-            quantityLabel.setText(Integer.toString(quantity));
-            minusButton.setOnAction(new EventHandler<ActionEvent>(){
-                @Override
-                public void handle(ActionEvent event) {
-                    if(Integer.parseInt(quantityLabel.toString()) <= 1){
-                        minusButton.isDisable();
-                    } else {
-                        quantityLabel.setText(Integer.toString(quantity-1));
-                    }
-                }
-            });
-            addButton.setOnAction(new EventHandler<ActionEvent>(){
-                @Override
-                public void handle(ActionEvent event) {
-                    quantityLabel.setText(Integer.toString(quantity+1));                  
-                }
-            });
-        }
-    }
 
     private void updateListAndUpdateUI(Product product) {
         cashier.addProduct(product);
-        listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+        productListProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+        quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
         updatePrice();
     }
 
@@ -162,7 +197,8 @@ public class CartController implements Initializable {
         } else {
             Product item = (Product) orderList.getSelectionModel().getSelectedItem();
             cashier.deleteProduct(item);
-            listProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+            productListProperty.set(FXCollections.observableArrayList(cashier.getOrder()));
+            quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
             updatePrice();
         }
     }
@@ -284,13 +320,13 @@ public class CartController implements Initializable {
                     AlertMessages.ORDER_STATUS_EMPTY_DESC.getMessage());
         }
     }
-    
-    public void resetCart(){
+
+    public void resetCart() {
         Alert confirmationBox = showConfirmationBox(AlertType.CONFIRMATION,
-                    AlertMessages.CART_EMPTY_TITLE.getMessage(),
-                    AlertMessages.CART_EMPTY_DESC.getMessage());
+                AlertMessages.CART_EMPTY_TITLE.getMessage(),
+                AlertMessages.CART_EMPTY_DESC.getMessage());
         Optional<ButtonType> result = confirmationBox.showAndWait();
-        if(result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             reset();
         }
     }
@@ -305,7 +341,7 @@ public class CartController implements Initializable {
         AlertBox alertBox = new AlertBox();
         alertBox.showAlertBox(alertType, title, content);
     }
-    
+
     private Alert showConfirmationBox(AlertType alertType, String title, String content) {
         Alert confirmationBox = new Alert(alertType);
         confirmationBox.setTitle(title);
