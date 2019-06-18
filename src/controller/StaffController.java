@@ -16,11 +16,13 @@ import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
+import utils.AlertBox;
+import utils.AlertMessages;
 
 /**
  * FXML Controller class
  *
- * @author Nawaphan Chayopathum(Jan)
+ * @author Jan, 2019
  */
 public class StaffController implements Initializable {
     Product product1, product2, product3, product4, product5;
@@ -52,11 +54,11 @@ public class StaffController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        product1 = new Product(101, "Milk", "Low Fat 2.0 litres", 4.99);
-        product2 = new Product(102, "Eggs", "White Large 12 Eggs", 2.49);
-        product3 = new Product(103, "Bread", "100% Whole Wheat Sliced Bread", 2.00);
-        product4 = new Product(104, "Yogurt", "Natural Yogurt 750 g", 2.89);
-        product5 = new Product(105, "Salmon", "Atlantic Salmon Portion 300 g", 11.99);
+        product1 = new Product(101, 111, "Milk", "Low Fat 2.0 litres", 4.99);
+        product2 = new Product(102, 111, "Eggs", "White Large 12 Eggs", 2.49);
+        product3 = new Product(103, 111, "Bread", "100% Whole Wheat Sliced Bread", 2.00);
+        product4 = new Product(104, 111, "Yogurt", "Natural Yogurt 750 g", 2.89);
+        product5 = new Product(105, 111, "Salmon", "Atlantic Salmon Portion 300 g", 11.99);
 
         product1Button.setText(product1.getName());
         product2Button.setText(product2.getName());
@@ -126,15 +128,14 @@ public class StaffController implements Initializable {
             }
         }
         if(count == 0){
-            showAlertBox(AlertType.INFORMATION, "Filter Date Status", "No order on selected date");
+            showAlertBox(AlertType.INFORMATION, 
+                    AlertMessages.FILTER_DATE_TITLE.getMessage(), 
+                    AlertMessages.FILTER_DATE_DESC.getMessage());
         }
     }
     
     private void showAlertBox(Alert.AlertType alertType, String title, String content){
-        Alert alert = new Alert(alertType);
-            alert.setTitle(title);
-            alert.setHeaderText(null);
-            alert.setContentText(content);
-            alert.showAndWait();
+        AlertBox alertBox = new AlertBox();
+        alertBox.showAlertBox(alertType, title, content);
     }
 }
