@@ -30,15 +30,7 @@
     <left>
         <VBox>
             <Label styleClass="subHeader">Grocery Category</Label>
-            <Label>Bakery</Label>
-            <Label>Dairy &amp; Eggs</Label>
-            <Label>Pasta &amp; Rice</Label>
-            <Label>Chips &amp; Snacks</Label>
-            <Label>Frozen Food</Label>
-            <Label>Cereal &amp; Breakfast</Label>
-            <Label>Drinks</Label>
-            <Label>Fruits &amp; Vegetables</Label>
-            <Label>Meat &amp; Seafood</Label>
+            <ListView fx:id="categoryListView"/>
         </VBox>
     </left>
     <right>
