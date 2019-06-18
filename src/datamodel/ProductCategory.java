@@ -4,6 +4,7 @@ package datamodel;
  *
  * @author Jan
  */
+
 public class ProductCategory {
     private int id;
     private String name;
@@ -14,4 +15,9 @@ public class ProductCategory {
         this.name = name;
         this.description = description;
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }   
 }
