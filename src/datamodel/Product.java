@@ -3,11 +3,12 @@ package datamodel;
 /**
  * This class models the basic attributes for Product.
  * 
- * @author Nawaphan Chayopathum(Jan)
+ * @author Jan, 2019
  */
 public class Product {
 
     private int id;
+    private int categoryId;
     private String name;
     private String description;
     private double price;
@@ -16,12 +17,14 @@ public class Product {
      * Constructor of Product with given id, given name, given description and given price.
      * 
      * @param id the id of product
+     * @param categoryId the id of product category
      * @param name the name of product
      * @param description the description of product
      * @param price the price of product
      */
-    public Product(int id, String name, String description, double price) {
+    public Product(int id, int categoryId, String name, String description, double price) {
         this.id = id;
+        this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.price = price;
