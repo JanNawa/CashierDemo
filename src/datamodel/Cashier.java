@@ -14,7 +14,7 @@ public class Cashier{
 
     private int orderId;
     private LocalDateTime dateTime;
-    private ArrayList<Product> order;
+    private List<Product> order;
     private List<Integer> quantity;
     private double subtotal;
     private double tax;
@@ -69,6 +69,11 @@ public class Cashier{
         calcTotal();
     }
     
+    public void adjustQuantity(int index, int num){
+        quantity.set(index, quantity.get(index) + num);
+        calcTotal();
+    }
+    
     /**
      * Delete the product from the order list and update the total price
      * 
@@ -78,6 +83,7 @@ public class Cashier{
         for(int i=0; i<order.size(); i++){
             if(order.get(i) == product){
                 quantity.remove(i);
+                break;
             }
         }
         order.remove(product);
@@ -133,8 +139,8 @@ public class Cashier{
      * 
      * @return copy of order list
      */
-    public ArrayList<Product> getOrder() {
-        ArrayList<Product> copyOrder = new ArrayList<>(order);
+    public List<Product> getOrder() {
+        List<Product> copyOrder = new ArrayList<>(order);
         return copyOrder;
     }
     
