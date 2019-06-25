@@ -151,7 +151,7 @@ public class UserController implements Initializable {
     @FXML
     public void deleteProduct(ActionEvent event) {
         if (orderList.getSelectionModel().getSelectedItem() == null) {
-            showAlertBox(AlertType.ERROR,
+            AlertBox.showAlertBox(AlertType.ERROR,
                     AlertMessages.ORDER_STATUS_TITLE.getMessage(),
                     AlertMessages.ORDER_STATUS_NO_SELECTION_DESC.getMessage());
         } else {
@@ -191,7 +191,7 @@ public class UserController implements Initializable {
             if (controller.isUsernameNullOrEmpty()
                     || controller.isPasswordNullOrEmpty()
                     || controller.isPasswordConfirmNullOrEmpty()) {
-                showAlertBox(AlertType.ERROR,
+                AlertBox.showAlertBox(AlertType.ERROR,
                         AlertMessages.SIGNUP_EMPTY_FIELD_TITLE.getMessage(),
                         AlertMessages.SIGNUP_EMPTY_FIELD_DESC.getMessage());
 
@@ -199,11 +199,11 @@ public class UserController implements Initializable {
                 goToHistory();
             } else {
                 if (controller.isValidUsername()) {
-                    showAlertBox(AlertType.ERROR,
+                    AlertBox.showAlertBox(AlertType.ERROR,
                             AlertMessages.SIGNUP_INVALID_USERNAME_TITLE.getMessage(),
                             AlertMessages.SIGNUP_INVALID_USERNAME_DESC.getMessage());
                 } else if (!controller.isSamePassword()) {
-                    showAlertBox(AlertType.ERROR,
+                    AlertBox.showAlertBox(AlertType.ERROR,
                             AlertMessages.SIGNUP_DIFFERENT_PASSWORD_TITLE.getMessage(),
                             AlertMessages.SIGNUP_DIFFERENT_PASSWORD_DESC.getMessage());
                 }
@@ -224,7 +224,7 @@ public class UserController implements Initializable {
             if (controller.authenticateAccount()) {
                 goToHistory();
             } else {
-                showAlertBox(AlertType.ERROR,
+                AlertBox.showAlertBox(AlertType.ERROR,
                         AlertMessages.LOGIN_INVALID_TITLE.getMessage(),
                         AlertMessages.LOGIN_INVALID_DESC.getMessage());
             }
@@ -270,12 +270,12 @@ public class UserController implements Initializable {
             int newId = orderHis.retrieveOrderId() + 1;
             cashier.setOrderId(newId);
             orderHis.writeOrderHistory(cashier);
-            showAlertBox(AlertType.CONFIRMATION,
+            AlertBox.showAlertBox(AlertType.CONFIRMATION,
                     AlertMessages.ORDER_STATUS_TITLE.getMessage(),
                     AlertMessages.ORDER_STATUS_SUCCESS_DESC.getMessage());
             reset();
         } else {
-            showAlertBox(AlertType.ERROR,
+            AlertBox.showAlertBox(AlertType.ERROR,
                     AlertMessages.ORDER_STATUS_TITLE.getMessage(),
                     AlertMessages.ORDER_STATUS_EMPTY_DESC.getMessage());
         }
@@ -285,11 +285,6 @@ public class UserController implements Initializable {
         cashier = new Cashier();
         orderList.getItems().clear();
         updatePrice();
-    }
-
-    private void showAlertBox(AlertType alertType, String title, String content) {
-        AlertBox alertBox = new AlertBox();
-        alertBox.showAlertBox(alertType, title, content);
     }
 
     @FXML
