@@ -20,14 +20,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -105,11 +99,16 @@ public class CartController implements Initializable {
         Button minusButton = new Button("-");
         Label quantityLabel = new Label("");
         Button addButton = new Button("+");
+       
+        int index;
 
         private AdjustQuantity() {
             quantityLabel.setPadding(new Insets(1));
 
             hbox.getChildren().addAll(minusButton, quantityLabel, addButton);
+            
+            index = this.getIndex();
+            System.out.println("Index : " + index);
         }
 
         @Override
@@ -125,6 +124,10 @@ public class CartController implements Initializable {
                         } else {
                             int newQuantity = item - 1;
                             quantityLabel.setText("" + newQuantity);
+                            
+                            cashier.adjustQuantity(index, -1);
+                            quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
+                            updatePrice();
                         }
                     }
                 });
@@ -134,6 +137,10 @@ public class CartController implements Initializable {
                     public void handle(ActionEvent event) {
                         int newQuantity = item + 1;
                         quantityLabel.setText("" + newQuantity);
+                        
+                        cashier.adjustQuantity(index, 1);
+                        quantityListProperty.set(FXCollections.observableArrayList(cashier.getQuantity()));
+                        updatePrice();
                     }
                 });
                 
@@ -191,7 +198,7 @@ public class CartController implements Initializable {
     @FXML
     public void deleteProduct(ActionEvent event) {
         if (orderList.getSelectionModel().getSelectedItem() == null) {
-            showAlertBox(AlertType.ERROR,
+            AlertBox.showAlertBox(AlertType.ERROR,
                     AlertMessages.ORDER_STATUS_TITLE.getMessage(),
                     AlertMessages.ORDER_STATUS_NO_SELECTION_DESC.getMessage());
         } else {
@@ -231,7 +238,7 @@ public class CartController implements Initializable {
             if (controller.isUsernameNullOrEmpty()
                     || controller.isPasswordNullOrEmpty()
                     || controller.isPasswordConfirmNullOrEmpty()) {
-                showAlertBox(AlertType.ERROR,
+                AlertBox.showAlertBox(AlertType.ERROR,
                         AlertMessages.SIGNUP_EMPTY_FIELD_TITLE.getMessage(),
                         AlertMessages.SIGNUP_EMPTY_FIELD_DESC.getMessage());
 
@@ -239,11 +246,11 @@ public class CartController implements Initializable {
                 goToHistory();
             } else {
                 if (controller.isValidUsername()) {
-                    showAlertBox(AlertType.ERROR,
+                    AlertBox.showAlertBox(AlertType.ERROR,
                             AlertMessages.SIGNUP_INVALID_USERNAME_TITLE.getMessage(),
                             AlertMessages.SIGNUP_INVALID_USERNAME_DESC.getMessage());
                 } else if (!controller.isSamePassword()) {
-                    showAlertBox(AlertType.ERROR,
+                    AlertBox.showAlertBox(AlertType.ERROR,
                             AlertMessages.SIGNUP_DIFFERENT_PASSWORD_TITLE.getMessage(),
                             AlertMessages.SIGNUP_DIFFERENT_PASSWORD_DESC.getMessage());
                 }
@@ -264,7 +271,7 @@ public class CartController implements Initializable {
             if (controller.authenticateAccount()) {
                 goToHistory();
             } else {
-                showAlertBox(AlertType.ERROR,
+                AlertBox.showAlertBox(AlertType.ERROR,
                         AlertMessages.LOGIN_INVALID_TITLE.getMessage(),
                         AlertMessages.LOGIN_INVALID_DESC.getMessage());
             }
@@ -310,12 +317,12 @@ public class CartController implements Initializable {
             int newId = orderHis.retrieveOrderId() + 1;
             cashier.setOrderId(newId);
             orderHis.writeOrderHistory(cashier);
-            showAlertBox(AlertType.CONFIRMATION,
+            AlertBox.showAlertBox(AlertType.CONFIRMATION,
                     AlertMessages.ORDER_STATUS_TITLE.getMessage(),
                     AlertMessages.ORDER_STATUS_SUCCESS_DESC.getMessage());
             reset();
         } else {
-            showAlertBox(AlertType.ERROR,
+            AlertBox.showAlertBox(AlertType.ERROR,
                     AlertMessages.ORDER_STATUS_TITLE.getMessage(),
                     AlertMessages.ORDER_STATUS_EMPTY_DESC.getMessage());
         }
@@ -334,12 +341,8 @@ public class CartController implements Initializable {
     private void reset() {
         cashier = new Cashier();
         orderList.getItems().clear();
+        quantityList.getItems().clear();
         updatePrice();
-    }
-
-    private void showAlertBox(AlertType alertType, String title, String content) {
-        AlertBox alertBox = new AlertBox();
-        alertBox.showAlertBox(alertType, title, content);
     }
 
     private Alert showConfirmationBox(AlertType alertType, String title, String content) {
