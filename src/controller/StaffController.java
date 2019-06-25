@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.DateCell;
@@ -128,14 +127,9 @@ public class StaffController implements Initializable {
             }
         }
         if(count == 0){
-            showAlertBox(AlertType.INFORMATION, 
+            AlertBox.showAlertBox(AlertType.INFORMATION, 
                     AlertMessages.FILTER_DATE_TITLE.getMessage(), 
                     AlertMessages.FILTER_DATE_DESC.getMessage());
         }
-    }
-    
-    private void showAlertBox(Alert.AlertType alertType, String title, String content){
-        AlertBox alertBox = new AlertBox();
-        alertBox.showAlertBox(alertType, title, content);
     }
 }
