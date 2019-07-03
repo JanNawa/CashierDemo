@@ -21,9 +21,6 @@
                 <Menu text="File">
                     <items>
                         <MenuItem text="Product List" onAction="#goToProductList"/>
-                        <MenuItem text="Sign Up" onAction="#signup"/>
-                        <MenuItem text="Login" onAction="#login"/>
-                        <MenuItem text="Go to History" onAction="#goToHistory"/>
                         <SeparatorMenuItem/>
                         <MenuItem text="Exit" onAction="#exitCashier"/>
                     </items>
