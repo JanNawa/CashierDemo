@@ -1,22 +1,16 @@
 package controller;
 
-import datamodel.OrderHistory;
-import datamodel.Product;
+import datamodel.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.fxml.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.DateCell;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.util.Callback;
-import utils.AlertBox;
-import utils.AlertMessages;
+import utils.*;
 
 /**
  * FXML Controller class
