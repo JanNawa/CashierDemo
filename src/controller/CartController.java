@@ -1,33 +1,20 @@
 package controller;
 
-import datamodel.Cashier;
-import datamodel.OrderHistory;
-import datamodel.Product;
+import datamodel.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import java.util.*;
+import javafx.fxml.*;
 import javafx.application.Platform;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
-import javafx.fxml.FXMLLoader;
+import javafx.event.*;
 import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
+import javafx.scene.layout.*;
 import javafx.util.Callback;
-import utils.AlertBox;
-import utils.AlertMessages;
+import utils.*;
 
 /**
  * FXML Controller class
@@ -213,100 +200,9 @@ public class CartController implements Initializable {
     @FXML
     public void goToProductList() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/ProductList.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Product List");
-            stage.setScene(new Scene(root, 750, 500));
-            stage.show();
+            new UIFactory().createComponent("Product List");
         } catch (IOException e) {
             System.out.println("couldn't load product list page");
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    public void signup() {
-        Object[] signupElements = initDialog("Sign Up", "/ui/signup.fxml");
-        Dialog<ButtonType> signupDialog = (Dialog<ButtonType>) signupElements[0];
-        FXMLLoader fxmlLoader = (FXMLLoader) signupElements[1];
-
-        //wait for user to press button
-        Optional<ButtonType> result = signupDialog.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            SignupController controller = fxmlLoader.getController();
-            if (controller.isUsernameNullOrEmpty()
-                    || controller.isPasswordNullOrEmpty()
-                    || controller.isPasswordConfirmNullOrEmpty()) {
-                AlertBox.showAlertBox(AlertType.ERROR,
-                        AlertMessages.SIGNUP_EMPTY_FIELD_TITLE.getMessage(),
-                        AlertMessages.SIGNUP_EMPTY_FIELD_DESC.getMessage());
-
-            } else if (!controller.isValidUsername() && controller.isSamePassword()) {
-                goToHistory();
-            } else {
-                if (controller.isValidUsername()) {
-                    AlertBox.showAlertBox(AlertType.ERROR,
-                            AlertMessages.SIGNUP_INVALID_USERNAME_TITLE.getMessage(),
-                            AlertMessages.SIGNUP_INVALID_USERNAME_DESC.getMessage());
-                } else if (!controller.isSamePassword()) {
-                    AlertBox.showAlertBox(AlertType.ERROR,
-                            AlertMessages.SIGNUP_DIFFERENT_PASSWORD_TITLE.getMessage(),
-                            AlertMessages.SIGNUP_DIFFERENT_PASSWORD_DESC.getMessage());
-                }
-            }
-        }
-    }
-
-    @FXML
-    public void login() {
-        Object[] loginElements = initDialog("Login", "/ui/login.fxml");
-        Dialog<ButtonType> loginDialog = (Dialog<ButtonType>) loginElements[0];
-        FXMLLoader fxmlLoader = (FXMLLoader) loginElements[1];
-
-        //wait for user to press button
-        Optional<ButtonType> result = loginDialog.showAndWait();
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            LoginController controller = fxmlLoader.getController();
-            if (controller.authenticateAccount()) {
-                goToHistory();
-            } else {
-                AlertBox.showAlertBox(AlertType.ERROR,
-                        AlertMessages.LOGIN_INVALID_TITLE.getMessage(),
-                        AlertMessages.LOGIN_INVALID_DESC.getMessage());
-            }
-        }
-    }
-
-    private Object[] initDialog(String title, String resource) {
-        Dialog<ButtonType> dialog = new Dialog<>();
-        dialog.initOwner(cartBorderPane.getScene().getWindow());
-        dialog.setTitle(title);
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource(resource));
-        try {
-            dialog.getDialogPane().setContent(fxmlLoader.load());
-        } catch (IOException e) {
-            System.out.println("couldn't load " + title + " page");
-        }
-
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
-        dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
-
-        return new Object[]{dialog, fxmlLoader};
-    }
-
-    @FXML
-    public void goToHistory() {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/staff.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Order History");
-            stage.setScene(new Scene(root, 750, 500));
-            stage.show();
-        } catch (IOException e) {
-            System.out.println("couldn't load history page");
         }
     }
 
