@@ -1,32 +1,18 @@
 package controller;
 
-import datamodel.Cashier;
-import datamodel.OrderHistory;
-import datamodel.Product;
+import datamodel.*;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import java.util.*;
+import javafx.fxml.*;
 import javafx.application.Platform;
-import javafx.beans.property.ListProperty;
-import javafx.beans.property.SimpleListProperty;
+import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
-import utils.AlertBox;
-import utils.AlertMessages;
+import utils.*;
 
 /**
  * FXML Controller class
@@ -166,15 +152,9 @@ public class UserController implements Initializable {
     @FXML
     public void goToProductList() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/ProductList.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Product List");
-            stage.setScene(new Scene(root, 750, 500));
-            stage.show();
+            new UIFactory().createComponent("Product List");
         } catch (IOException e) {
             System.out.println("couldn't load product list page");
-            e.printStackTrace();
         }
     }
 
@@ -252,12 +232,7 @@ public class UserController implements Initializable {
     @FXML
     public void goToHistory() {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ui/staff.fxml"));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setTitle("Order History");
-            stage.setScene(new Scene(root, 750, 500));
-            stage.show();
+            new UIFactory().createComponent("Order History");
         } catch (IOException e) {
             System.out.println("couldn't load history page");
         }
