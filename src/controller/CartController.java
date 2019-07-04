@@ -93,14 +93,14 @@ public class CartController implements Initializable {
             quantityLabel.setPadding(new Insets(1));
 
             hbox.getChildren().addAll(minusButton, quantityLabel, addButton);
-            
-            index = this.getIndex();
-            System.out.println("Index : " + index);
         }
 
         @Override
         protected void updateItem(Integer item, boolean empty) {
             super.updateItem(item, empty);
+            
+            index = this.getIndex();
+
             if (item != null) {
                 quantityLabel.setText("" + item);
                 minusButton.setOnAction(new EventHandler<ActionEvent>() {
