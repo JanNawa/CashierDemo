@@ -259,6 +259,7 @@ public class UserController implements Initializable {
     private void reset() {
         cashier = new Cashier();
         orderList.getItems().clear();
+        quantityList.getItems().clear();
         updatePrice();
     }
 
